@@ -3,6 +3,7 @@ package com.stocksense.app.core.navigation
 sealed class NavRoutes(val route: String) {
 
     // Auth flow
+    object Splash : NavRoutes("splash")
     object PhoneAuth : NavRoutes("phone_auth")
     object OtpVerify : NavRoutes("otp_verify/{phoneNumber}") {
         fun createRoute(phoneNumber: String) = "otp_verify/$phoneNumber"
