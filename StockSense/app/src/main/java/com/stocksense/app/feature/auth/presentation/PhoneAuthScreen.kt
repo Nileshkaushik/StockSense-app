@@ -28,13 +28,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.stocksense.app.core.ui.theme.*
 
 @Composable
 fun PhoneAuthScreen(
     onOtpSent: (String) -> Unit,
-    viewModel: AuthViewModel = hiltViewModel()
+    viewModel: AuthViewModel
 ) {
     val context = LocalContext.current
     val activity = context as Activity
@@ -93,18 +92,24 @@ fun PhoneAuthScreen(
                     Text("↗", color = BackgroundDark, fontSize = 17.sp, fontWeight = FontWeight.Black)
                 }
                 Spacer(Modifier.width(10.dp))
-                Text("StockSense", color = TextPrimary, fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold, letterSpacing = (-0.3).sp)
+                Text(
+                    "StockSense", color = TextPrimary, fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold, letterSpacing = (-0.3).sp
+                )
             }
 
             Spacer(Modifier.height(48.dp))
 
             // Step indicator
-            Row(verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(5.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
                 Box(Modifier.size(5.dp).clip(CircleShape).background(AccentGreen))
-                Text("STEP 1 OF 3", color = AccentGreen, fontSize = 10.sp,
-                    fontWeight = FontWeight.SemiBold, letterSpacing = 1.5.sp)
+                Text(
+                    "STEP 1 OF 3", color = AccentGreen, fontSize = 10.sp,
+                    fontWeight = FontWeight.SemiBold, letterSpacing = 1.5.sp
+                )
             }
             Spacer(Modifier.height(12.dp))
 
@@ -130,8 +135,10 @@ fun PhoneAuthScreen(
 
             Spacer(Modifier.height(36.dp))
 
-            Text("MOBILE NUMBER", color = TextSecondary, fontSize = 10.sp,
-                fontWeight = FontWeight.SemiBold, letterSpacing = 1.2.sp)
+            Text(
+                "MOBILE NUMBER", color = TextSecondary, fontSize = 10.sp,
+                fontWeight = FontWeight.SemiBold, letterSpacing = 1.2.sp
+            )
             Spacer(Modifier.height(10.dp))
 
             // Phone input
@@ -170,24 +177,33 @@ fun PhoneAuthScreen(
                         unfocusedIndicatorColor = Color.Transparent,
                         cursorColor = AccentGreen
                     ),
-                    textStyle = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Medium,
-                        letterSpacing = 1.sp, color = TextPrimary),
+                    textStyle = TextStyle(
+                        fontSize = 16.sp, fontWeight = FontWeight.Medium,
+                        letterSpacing = 1.sp, color = TextPrimary
+                    ),
                     modifier = Modifier.weight(1f),
                     singleLine = true,
                     trailingIcon = {
-                        Text("${phoneNumber.length}/10",
+                        Text(
+                            "${phoneNumber.length}/10",
                             color = if (phoneNumber.length == 10) AccentGreen else TextMuted,
                             fontSize = 11.sp,
-                            modifier = Modifier.padding(end = 12.dp))
+                            modifier = Modifier.padding(end = 12.dp)
+                        )
                     }
                 )
             }
 
             // Error
-            AnimatedVisibility(errorMessage.isNotEmpty(),
-                enter = fadeIn() + slideInVertically { -it }, exit = fadeOut()) {
+            AnimatedVisibility(
+                errorMessage.isNotEmpty(),
+                enter = fadeIn() + slideInVertically { -it },
+                exit = fadeOut()
+            ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp)
                         .clip(RoundedCornerShape(10.dp))
                         .background(LossRed.copy(0.08f))
                         .border(1.dp, LossRed.copy(0.25f), RoundedCornerShape(10.dp))
@@ -205,27 +221,35 @@ fun PhoneAuthScreen(
             // Info cards
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 Box(
-                    Modifier.weight(1f).clip(RoundedCornerShape(14.dp))
+                    Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(14.dp))
                         .background(SurfaceDark)
                         .border(1.dp, CardBorder, RoundedCornerShape(14.dp))
                         .padding(14.dp)
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("🔒", fontSize = 18.sp)
-                        Text("Your number is never shared", color = TextSecondary,
-                            fontSize = 11.sp, lineHeight = 15.sp)
+                        Text(
+                            "Your number is never shared", color = TextSecondary,
+                            fontSize = 11.sp, lineHeight = 15.sp
+                        )
                     }
                 }
                 Box(
-                    Modifier.weight(1f).clip(RoundedCornerShape(14.dp))
+                    Modifier
+                        .weight(1f)
+                        .clip(RoundedCornerShape(14.dp))
                         .background(AccentGreenDim)
                         .border(1.dp, AccentGreen.copy(0.2f), RoundedCornerShape(14.dp))
                         .padding(14.dp)
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                         Text("🎁", fontSize = 18.sp)
-                        Text("3 days free Premium", color = AccentGreen,
-                            fontSize = 11.sp, fontWeight = FontWeight.SemiBold, lineHeight = 15.sp)
+                        Text(
+                            "3 days free Premium", color = AccentGreen,
+                            fontSize = 11.sp, fontWeight = FontWeight.SemiBold, lineHeight = 15.sp
+                        )
                     }
                 }
             }
@@ -241,7 +265,9 @@ fun PhoneAuthScreen(
                         errorMessage = "Please enter a valid 10-digit number"
                     }
                 },
-                modifier = Modifier.fillMaxWidth().height(56.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
                     .graphicsLayer { scaleX = buttonScale; scaleY = buttonScale },
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
@@ -251,11 +277,16 @@ fun PhoneAuthScreen(
                 enabled = phoneNumber.length == 10 && authState !is AuthState.Loading
             ) {
                 if (authState is AuthState.Loading) {
-                    CircularProgressIndicator(color = BackgroundDark,
-                        modifier = Modifier.size(22.dp), strokeWidth = 2.5.dp)
+                    CircularProgressIndicator(
+                        color = BackgroundDark,
+                        modifier = Modifier.size(22.dp),
+                        strokeWidth = 2.5.dp
+                    )
                 } else {
-                    Text("Send OTP  →", color = BackgroundDark, fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold, letterSpacing = 0.3.sp)
+                    Text(
+                        "Send OTP  →", color = BackgroundDark, fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold, letterSpacing = 0.3.sp
+                    )
                 }
             }
 

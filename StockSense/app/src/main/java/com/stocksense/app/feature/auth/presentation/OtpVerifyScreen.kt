@@ -28,7 +28,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.stocksense.app.core.ui.theme.*
 import kotlinx.coroutines.delay
 
@@ -37,7 +36,7 @@ fun OtpVerifyScreen(
     phoneNumber: String,
     onVerified: () -> Unit,
     onBack: () -> Unit,
-    viewModel: AuthViewModel = hiltViewModel()
+    viewModel: AuthViewModel
 ) {
     val context = LocalContext.current
     val authState by viewModel.authState.collectAsState()
