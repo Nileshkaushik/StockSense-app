@@ -264,7 +264,7 @@ fun OtpVerifyScreen(
                             otpValue = it.filter { c -> c.isDigit() }
                             errorMessage = ""
                             if (otpValue.length == 6) {
-                                viewModel.verifyOtp(otpValue)
+                                viewModel.verifyOtp(otpValue,phoneNumber)
                             }
                         }
                     },
@@ -337,7 +337,7 @@ fun OtpVerifyScreen(
             // Verify button
             Button(
                 onClick = {
-                    if (otpValue.length == 6) viewModel.verifyOtp(otpValue)
+                    if (otpValue.length == 6) viewModel.verifyOtp(otpValue,phoneNumber)
                 },
                 modifier = Modifier.fillMaxWidth().height(56.dp),
                 shape = RoundedCornerShape(16.dp),
